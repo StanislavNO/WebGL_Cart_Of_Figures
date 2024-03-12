@@ -5,14 +5,14 @@ namespace Assets.Scripts.Model
 {
     internal abstract class State : MonoBehaviour
     {
-        private List<Transition> _transitions;
+        [SerializeField] private List<Transition> Transitions;
 
         public void Enter()
         {
             if (enabled == false)
                 enabled = true;
 
-            foreach (var transition in _transitions)
+            foreach (var transition in Transitions)
                 transition.enabled = true;
         }
 
@@ -21,7 +21,7 @@ namespace Assets.Scripts.Model
             if (enabled == false)
                 return;
 
-            foreach (var transition in _transitions)
+            foreach (var transition in Transitions)
                 transition.enabled = false;
 
             enabled = false;
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Model
 
         public bool TryGetNextState(out State nextState)
         {
-            foreach (var transition in _transitions)
+            foreach (var transition in Transitions)
             {
                 if (transition.NeedTransit)
                 {

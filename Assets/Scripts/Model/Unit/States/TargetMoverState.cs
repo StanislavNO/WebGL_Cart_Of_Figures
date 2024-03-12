@@ -28,16 +28,20 @@ namespace Assets.Scripts.Model
 
             Move();
 
-            if (_transform.position == _target.position)
+            if (_transform.position.x == _target.position.x &&
+                _transform.position.z == _target.position.z)
                 ChangeTarget();
         }
 
         private void Move()
         {
-            transform.position = Vector3.MoveTowards(
+            _transform.position = Vector3.MoveTowards(
                             _transform.position,
                             _target.position,
                             _speed * Time.deltaTime);
+
+
+            _transform.LookAt(_target);
         }
 
         private void ChangeTarget()
