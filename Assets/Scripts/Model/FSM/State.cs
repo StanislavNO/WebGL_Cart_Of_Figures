@@ -1,27 +1,33 @@
-﻿using Assets.Scripts.Model.Unit.Transitions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.Model
 {
-    internal abstract class State
+    internal abstract class State : MonoBehaviour
     {
         private List<Transition> _transitions;
 
-        internal void Enter()
+        public void Enter()
         {
-            throw new NotImplementedException();
+            if (enabled == false)
+                enabled = true;
+
+            foreach (var transition in _transitions)
+                transition.enabled = true;
         }
 
-        internal void Exit()
+        public void Exit()
         {
-            throw new NotImplementedException();
+            if (enabled == false)
+                return;
+
+            foreach (var transition in _transitions)
+                transition.enabled = false;
+
+            enabled = false;
         }
 
-        internal bool TryGetNextState(out State nextState)
+        public bool TryGetNextState(out State nextState)
         {
             foreach (var transition in _transitions)
             {

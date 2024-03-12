@@ -1,11 +1,17 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Model
 {
     internal class Transition : MonoBehaviour
     {
-        public bool NeedTransit { get; internal set; }
-        public State TargetState { get; internal set; }
+        [SerializeField] private State _nextState;
+
+        public State TargetState => _nextState;
+        public bool NeedTransit { get; protected set; }
+
+        private void OnEnable()
+        {
+            NeedTransit = false;
+        }
     }
 }
