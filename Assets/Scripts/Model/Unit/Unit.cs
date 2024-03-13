@@ -9,6 +9,5 @@ namespace Assets.Scripts.Model.Unit
 {
     internal class Unit : MonoBehaviour
     {
-
     }
 }

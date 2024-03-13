@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Model
 {
-    internal class TargetMoverState : State
+    internal class MoverState : State
     {
         [SerializeField] private float _speed = 1;
         [SerializeField] private Transform _homePoint;
@@ -39,9 +39,6 @@ namespace Assets.Scripts.Model
                             _transform.position,
                             _target.position,
                             _speed * Time.deltaTime);
-
-
-            _transform.LookAt(_target);
         }
 
         private void ChangeTarget()
@@ -53,6 +50,8 @@ namespace Assets.Scripts.Model
                 _target = _homePoint;
             else
                 _target = _resourcePoint;
+            
+            _transform.LookAt(_target);
         }
     }
 }
