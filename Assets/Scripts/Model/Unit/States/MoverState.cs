@@ -4,7 +4,7 @@ namespace Assets.Scripts.Model
 {
     internal class MoverState : State
     {
-        [SerializeField] private float _speed = 1;
+        [SerializeField] private float _speed = 5;
         [SerializeField] private Transform _homePoint;
         [SerializeField] private Transform _resourcePoint;
 
@@ -19,6 +19,7 @@ namespace Assets.Scripts.Model
         private void OnEnable()
         {
             _target = _resourcePoint;
+            RotateToTarget();
         }
 
         private void Update()
@@ -50,8 +51,16 @@ namespace Assets.Scripts.Model
                 _target = _homePoint;
             else
                 _target = _resourcePoint;
-            
-            _transform.LookAt(_target);
+
+            RotateToTarget();
+        }
+
+        private void RotateToTarget()
+        {
+            Vector3 direction = _target.position - _transform.position;
+            Quaternion rotation = Quaternion.LookRotation(direction);
+
+            _transform.rotation = rotation;
         }
     }
 }
