@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Model.Unit;
+using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Model
 {
-    internal class MoverState : State
+    internal class MoverState : State , IMover
     {
         [SerializeField] private float _speed = 5;
         [SerializeField] private Transform _homePoint;
@@ -10,6 +12,9 @@ namespace Assets.Scripts.Model
 
         private Transform _target;
         private Transform _transform;
+
+        public event Action Moving;
+        public event Action Carrying;
 
         private void Awake()
         {
@@ -19,6 +24,7 @@ namespace Assets.Scripts.Model
         private void OnEnable()
         {
             _target = _resourcePoint;
+            Moving?.Invoke();
             RotateToTarget();
         }
 
@@ -48,9 +54,15 @@ namespace Assets.Scripts.Model
                 return;
 
             if (_target == _resourcePoint)
+            {
                 _target = _homePoint;
+                Carrying?.Invoke();
+            }
             else
+            {
                 _target = _resourcePoint;
+                Moving?.Invoke();
+            }
 
             RotateToTarget();
         }
