@@ -1,22 +1,20 @@
-﻿using Assets.Scripts.Model.Unit;
+﻿using Assets.Scripts.Controller;
 using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Model
 {
-    internal class MoverState : State , IMover
+    public class MoverState : State
     {
         [SerializeField] private float _speed = 5;
         [SerializeField] private Transform _homePoint;
         [SerializeField] private Transform _resourcePoint;
+        [SerializeField] private UnitAnimationsController _animationsController;
 
         private Transform _target;
         private Transform _transform;
 
-        public event Action Moving;
-        public event Action Carrying;
-
-        private void Awake()
+        public void Awake()
         {
             _transform = transform;
         }
@@ -24,14 +22,13 @@ namespace Assets.Scripts.Model
         private void OnEnable()
         {
             _target = _resourcePoint;
-            Moving?.Invoke();
             RotateToTarget();
         }
 
         private void Update()
         {
             if (_target == null)
-                return;
+                ChangeTarget();
 
             Move();
 
@@ -51,17 +48,21 @@ namespace Assets.Scripts.Model
         private void ChangeTarget()
         {
             if (_target == null)
-                return;
+            {
+                _target = _resourcePoint;
+                RotateToTarget();
+                _animationsController.StartMoving();
+            }
 
             if (_target == _resourcePoint)
             {
                 _target = _homePoint;
-                Carrying?.Invoke();
+                _animationsController.StartCarrying();
             }
             else
             {
                 _target = _resourcePoint;
-                Moving?.Invoke();
+                _animationsController.StartMoving();
             }
 
             RotateToTarget();

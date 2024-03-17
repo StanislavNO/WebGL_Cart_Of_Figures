@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Model.Unit;
+﻿using Assets.Scripts.Model;
 using UnityEngine;
-//using Color = UnityEngine.Color;
+//using Color = UnityEngine.Color
 
 
 namespace Assets.Scripts.Controller
@@ -20,9 +20,7 @@ namespace Assets.Scripts.Controller
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     if (_hit.collider.TryGetComponent(out IInteractable unit))
-                    {
                         unit.HandleClick();
-                    }
                 }
             }
 

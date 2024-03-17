@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Model.Unit
+namespace Assets.Scripts.Model
 {
     public class RagdollController : MonoBehaviour
     {

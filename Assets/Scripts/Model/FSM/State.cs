@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Model
 {
-    internal abstract class State : MonoBehaviour
+    public abstract class State : MonoBehaviour
     {
         [SerializeField] private List<Transition> Transitions;
 

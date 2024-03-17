@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Model.Unit
+﻿namespace Assets.Scripts.Model
 {
     internal interface IInteractable
     {
