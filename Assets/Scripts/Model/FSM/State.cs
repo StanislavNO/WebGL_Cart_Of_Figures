@@ -7,6 +7,11 @@ namespace Assets.Scripts.Model
     {
         [SerializeField] private List<Transition> Transitions;
 
+        private void Awake()
+        {
+            enabled = false;
+        }
+
         public void Enter()
         {
             if (enabled == false)

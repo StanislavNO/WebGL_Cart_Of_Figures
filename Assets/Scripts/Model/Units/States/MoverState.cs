@@ -14,9 +14,14 @@ namespace Assets.Scripts.Model
         private Transform _target;
         private Transform _transform;
 
-        public void Awake()
+        private void Awake()
         {
             _transform = transform;
+        }
+
+        private void Start()
+        {
+            _animationsController.StartMoving();
         }
 
         private void OnEnable()
@@ -28,7 +33,7 @@ namespace Assets.Scripts.Model
         private void Update()
         {
             if (_target == null)
-                ChangeTarget();
+                return;
 
             Move();
 
@@ -48,11 +53,7 @@ namespace Assets.Scripts.Model
         private void ChangeTarget()
         {
             if (_target == null)
-            {
-                _target = _resourcePoint;
-                RotateToTarget();
-                _animationsController.StartMoving();
-            }
+                return;
 
             if (_target == _resourcePoint)
             {
