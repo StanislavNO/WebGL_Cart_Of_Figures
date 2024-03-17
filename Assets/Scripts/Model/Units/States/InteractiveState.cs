@@ -30,8 +30,6 @@ namespace Assets.Scripts.Model
                     _unit.transform.position,
                     _transform.position,
                     _speed * Time.deltaTime);
-
-                
             }
         }
     }
