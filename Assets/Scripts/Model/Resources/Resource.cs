@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Model.Units.Transitions
+namespace Assets.Scripts.Model
 {
-    public class EmptyInvetoryTransition : MonoBehaviour
+    public class Resource : MonoBehaviour
     {
 
         // Use this for initialization

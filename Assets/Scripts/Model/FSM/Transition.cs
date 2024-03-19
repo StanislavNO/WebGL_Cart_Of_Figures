@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Model
 {
-    internal class Transition : MonoBehaviour
+    public class Transition : MonoBehaviour
     {
         [SerializeField] private State _nextState;
 

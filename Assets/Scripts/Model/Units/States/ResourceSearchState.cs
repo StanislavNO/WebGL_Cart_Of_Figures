@@ -3,13 +3,14 @@ using System;
 
 namespace Assets.Scripts.Model.Units.States
 {
-    public class ResourceSearchState : MonoBehaviour
+    public class ResourceSearchState : State
     {
         private const string Moving = "Moving";
 
-        [SerializeField] private Animator _animator;
-        [SerializeField] private ResourceSpawner _spawner;
         [SerializeField] private float _speed;
+        [SerializeField] private ResourceSpawner _spawner;
+        [SerializeField] private Inventory _inventory;
+        [SerializeField] private Animator _animator;
 
         private void Start()
         {
@@ -20,6 +21,15 @@ namespace Assets.Scripts.Model.Units.States
         private void Update()
         {
             Move();
+        }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            if(collider.TryGetComponent(out ResourceSpawner spawner))
+            {
+                Resource resource = spawner.GetResource();
+                _inventory.Add(resource);
+            }
         }
 
         private void Move()

@@ -7,9 +7,10 @@ namespace Assets.Scripts.Model.Units.States
     {
         private const string Carrying = "Carrying";
 
+        [SerializeField] private float _speed;
         [SerializeField] private Animator _animator;
         [SerializeField] private Warehouse _warehouse;
-        [SerializeField] private float _speed;
+        [SerializeField] private Inventory _inventory;
 
         private void Start()
         {
@@ -20,6 +21,12 @@ namespace Assets.Scripts.Model.Units.States
         private void Update()
         {
             Move();
+        }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            if (collider.TryGetComponent(out Warehouse _))
+                _inventory.Delete();
         }
 
         private void Move()

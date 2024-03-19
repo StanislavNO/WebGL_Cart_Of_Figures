@@ -1,14 +1,13 @@
 ﻿using Assets.Scripts.Model.Units;
 using UnityEngine;
-using System;
 
 namespace Assets.Scripts.Model
 {
-    internal class InteractiveState : State 
+    public class InteractiveState : State
     {
-        [SerializeField] private RagdollController _ragdollController;
-        [SerializeField] private Unit _unit;
         [SerializeField] private float _speed;
+        [SerializeField] private Unit _unit;
+        [SerializeField] private RagdollController _ragdollController;
 
         private Ray _ray;
 
